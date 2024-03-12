@@ -38,4 +38,10 @@ public class BoardController {
         request.setAttribute("board", board);
         return "board/detail";
     }
+
+    @PostMapping("/board/{id}/delete")
+    public String delete(@PathVariable int id) {
+        boardNativeRepository.deleteById(id);
+        return "redirect:/";
+    }
 }

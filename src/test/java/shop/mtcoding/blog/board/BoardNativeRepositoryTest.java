@@ -45,6 +45,19 @@ public class BoardNativeRepositoryTest {
         System.out.println("findById_test: " + board);
         assertThat(board.getTitle()).isEqualTo("제목1");
         assertThat(board.getUsername()).isEqualTo("ssar");
+    }
+
+    @Test
+    public void deleteById_test() {
+        // given
+        int id = 1;
+
+        // when
+        boardNativeRepository.deleteById(id);
+
+        // then
+        List<Board> boardList = boardNativeRepository.findAll();
+        assertThat(boardList.size()).isEqualTo(3);
 
     }
 }
