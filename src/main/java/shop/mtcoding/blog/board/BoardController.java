@@ -37,7 +37,17 @@ public class BoardController {
     }
 
     @GetMapping("/board/{id}")
-    public String detail(@PathVariable Integer id) {
+    public String detail(@PathVariable (name = "id") Integer id, HttpServletRequest request) {
+        Board board = boardNativeRepository.findById(id);
+        request.setAttribute("board", board);
         return "board/detail";
+    }
+
+    @PostMapping("/board/{id}/delete")
+    public String delete(@PathVariable (name = "id") Integer id) {
+        // *** 항상 출력해보고 디비에 넣어라.
+        boardNativeRepository.deleteById(id);
+
+        return "redirect:/";
     }
 }
