@@ -7,10 +7,19 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.util.List;
+
 @Repository
 @RequiredArgsConstructor
 public class BoardNativeRepository {
     private final EntityManager em;
+
+    public List<Board> findAll() {
+        Query query = em.createNativeQuery("select * from board_tb order by id desc", Board.class);
+
+//        return (List<Board>)query.getResultList();
+        return query.getResultList();
+    }
 
     @Transactional
     public void save(String title, String content, String username) {

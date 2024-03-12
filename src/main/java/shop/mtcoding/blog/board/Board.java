@@ -3,6 +3,7 @@ package shop.mtcoding.blog.board;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
+import shop.mtcoding.blog.util.MyDateUtil;
 
 import java.sql.Timestamp;
 
@@ -17,6 +18,10 @@ public class Board {
     private String username;
     private String content;
     private Timestamp createdAt;
+    
+    public String getTime(){ // 여기에 타임이 없지만 머스태치에서 time으로 꺼낼 수 있어. 
+        return MyDateUtil.timestampFormat(createdAt);
+    }
 
     // 세터는 모든 필드에 적용될 필요가 없기 때문에 필요한 것만 만들어서 쓴다.
     // 이렇게 하지 않고 모든 필드의 세터를 열어두면 컨트롤러에서 막 이것저것 다 고치는 이상한 짓을 하는 사람이 있다.
