@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -14,6 +15,23 @@ import java.util.List;
 public class BoardController {
 
     private final BoardNativeRepository boardNativeRepository;
+
+    @GetMapping("/board/{id}/update-form")
+    public String updateForm(@PathVariable (name="id") Integer id, HttpServletRequest request){
+        Board board = boardNativeRepository.findById(id);
+        request.setAttribute("board", board);
+        return "board/update-form";
+    }
+
+    @PostMapping("/board/{id}/update")
+    public String update(@PathVariable (name = "id") Integer id, String title, String  content, String  username){
+        System.out.println("id: "+id);
+        System.out.println("title: "+title);
+        System.out.println("content: "+content);
+        System.out.println("username: "+username);
+        boardNativeRepository.updateById(id, title, content, username);
+        return "redirect:/board/"+id;
+    }
 
     @GetMapping("/")
     public String index(HttpServletRequest request) {
