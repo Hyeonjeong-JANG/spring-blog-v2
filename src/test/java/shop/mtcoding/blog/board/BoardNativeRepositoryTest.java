@@ -58,6 +58,21 @@ public class BoardNativeRepositoryTest {
         // then
         List<Board> boardList = boardNativeRepository.findAll();
         assertThat(boardList.size()).isEqualTo(3);
+    }
 
+    @Test
+    public void updateById_test() {
+        // given
+        int id = 1;
+        String title = "메롱";
+        String content = "롱메";
+
+        // when
+        boardNativeRepository.updateById(id, title, content);
+
+        // then
+        Board board = boardNativeRepository.findById(id);
+        assertThat(board.getTitle()).isEqualTo("메롱");
+        assertThat(board.getContent()).isEqualTo("롱메");
     }
 }
