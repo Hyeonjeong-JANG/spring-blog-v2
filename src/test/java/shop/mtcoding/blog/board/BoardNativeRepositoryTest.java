@@ -16,44 +16,62 @@ public class BoardNativeRepositoryTest {
     private BoardNativeRepository boardNativeRepository;
 
     @Test
-    public void deleteById_test() {
+    public void updateById_test() {
         // given
         int id = 1;
+        String title = "제목수정";
+        String content = "내용수정";
+        String username = "ssar2";
 
         // when
-        boardNativeRepository.deleteById(id);
-        List<Board> boardList = boardNativeRepository.findAll();
-
-        // then
-        Assertions.assertThat(boardList.size()).isEqualTo(3);
-
-    }
-
-    @Test
-    public void findById_test() {
-        // given
-        int id = 1;
-
-        // when
+        boardNativeRepository.updateById(id, title, content, username);
         Board board = boardNativeRepository.findById(id);
 
         // then
-        Assertions.assertThat(board.getTitle()).isEqualTo("제목1");
-        Assertions.assertThat(board.getContent()).isEqualTo("내용1");
-
+        Assertions.assertThat(board.getContent()).isEqualTo("내용수정");
+        Assertions.assertThat(board.getTitle()).isEqualTo("제목수정");
+        Assertions.assertThat(board.getUsername()).isEqualTo("ssar2");
     }
 
+        @Test
+        public void deleteById_test () {
+            // given
+            int id = 1;
 
-    @Test
-    public void findAll_test() {
-        // given
+            // when
+            boardNativeRepository.deleteById(id);
+            List<Board> boardList = boardNativeRepository.findAll();
+
+            // then
+            Assertions.assertThat(boardList.size()).isEqualTo(3);
+
+        }
+
+        @Test
+        public void findById_test () {
+            // given
+            int id = 1;
+
+            // when
+            Board board = boardNativeRepository.findById(id);
+
+            // then
+            Assertions.assertThat(board.getTitle()).isEqualTo("제목1");
+            Assertions.assertThat(board.getContent()).isEqualTo("내용1");
+
+        }
 
 
-        // when
-        List<Board> boardList = boardNativeRepository.findAll();
+        @Test
+        public void findAll_test () {
+            // given
 
-        // then
-        Assertions.assertThat(boardList.size()).isEqualTo(4);
 
+            // when
+            List<Board> boardList = boardNativeRepository.findAll();
+
+            // then
+            Assertions.assertThat(boardList.size()).isEqualTo(4);
+
+        }
     }
-}

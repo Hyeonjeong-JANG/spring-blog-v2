@@ -15,6 +15,20 @@ public class BoardNativeRepository {
 
 
     @Transactional
+    public void updateById(int id, String title, String content, String username) {
+        String q = """
+                update board_tb set title =?, content=?, username=? where id =?
+                """;
+        Query query = em.createNativeQuery(q);
+        query.setParameter(1, title);
+        query.setParameter(2, content);
+        query.setParameter(3, username);
+        query.setParameter(4, id);
+
+        query.executeUpdate();
+    }
+
+    @Transactional
     public void deleteById(int id) {
         String q = """
                 delete from board_tb where id =?
