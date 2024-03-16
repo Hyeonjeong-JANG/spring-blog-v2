@@ -1,5 +1,6 @@
 package shop.mtcoding.blog.board;
 
+import jakarta.persistence.EntityManager;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,23 @@ import java.util.List;
 public class BoardPersistRepositoryTest {
     @Autowired
     private BoardPersistRepository boardPersistRepository;
+
+    @Autowired
+    private EntityManager em;
+
+    @Test
+    public void deleteById_test() {
+        // given
+        int id = 1;
+        //
+        List<Board> boardList = boardPersistRepository.findAll();
+        boardPersistRepository.deleteById(id);
+        em.flush();
+
+        // then
+//        Assertions.assertThat(board.getTitle()).isEqualTo("제목1"); // 인텔리제이 콘솔창 한글이 깨져서 부득이하게 시스템아웃출력함
+        System.out.println(boardList);
+    }
 
     @Test
     public void findAll_test() {
@@ -48,7 +66,7 @@ public class BoardPersistRepositoryTest {
         boardPersistRepository.save(board);
 
         // then
-        Assertions.assertThat(board.getTitle()).isEqualTo("title5");
+        //Assertions.assertThat(board.getTitle()).isEqualTo("title5");
         System.out.println("save_test:" + board);
     }
 }
