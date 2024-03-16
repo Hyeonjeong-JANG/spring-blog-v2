@@ -20,7 +20,7 @@ public class Board {
     private Integer id;
     private String title;
     private String content;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private User user;
     @CreationTimestamp
     private Timestamp createdAt;

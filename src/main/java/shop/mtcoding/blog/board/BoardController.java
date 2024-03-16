@@ -12,26 +12,25 @@ import java.util.List;
 @RequiredArgsConstructor
 @Controller
 public class BoardController {
-    private final BoardNativeRepository boardNativeRepository;
-    private final BoardPersistRepository boardPersistRepository;
+    private final BoardRepository boardRepository;
 
     @GetMapping("/board/{id}/update-form")
     public String updateForm(@PathVariable Integer id, HttpServletRequest request) {
-        Board board = boardNativeRepository.findById(id);
-        request.setAttribute("board", board);
+//        Board board = boardNativeRepository.findById(id);
+//        request.setAttribute("board", board);
         return "board/update-form";
     }
 
     @PostMapping("/board/{id}/update")
     public String update(@PathVariable Integer id, BoardRequest.UpdateDTO reqDTO) {
-        boardPersistRepository.updateById(id, reqDTO);
+//        boardPersistRepository.updateById(id, reqDTO);
         return "redirect:/board/" + id;
     }
 
     @GetMapping("/")
     public String index(HttpServletRequest request) {
-        List<Board> boardList = boardPersistRepository.findAll();
-        request.setAttribute("boardList", boardList);
+//        List<Board> boardList = boardPersistRepository.findAll();
+//        request.setAttribute("boardList", boardList);
         return "index";
     }
 
@@ -42,20 +41,20 @@ public class BoardController {
 
     @PostMapping("/board/save")
     public String save(BoardRequest.SaveDTO reqDTO) {
-        boardNativeRepository.save(reqDTO);
+//        boardNativeRepository.save(reqDTO);
         return "redirect:/";
     }
 
     @GetMapping("/board/{id}")
     public String detail(@PathVariable Integer id, HttpServletRequest request) {
-        Board board = boardPersistRepository.findById(id);
+        Board board = boardRepository.findByIdJoinUser(id);
         request.setAttribute("board", board);
         return "board/detail";
     }
 
     @PostMapping("/board/{id}/delete")
     public String delete(@PathVariable Integer id) {
-        boardPersistRepository.deleteById(id);
+//        boardPersistRepository.deleteById(id);
         return "redirect:/";
     }
 }
