@@ -5,10 +5,20 @@ import jakarta.persistence.Query;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Repository
 public class BoardRepository {
     private final EntityManager em;
+
+    public List<Board> findAll() {
+        String q = """
+                select b from Board b order by b.id desc
+                """;
+        Query query = em.createQuery(q, Board.class);
+        return query.getResultList();
+    }
 
     public Board findByIdJoinUser(int id) {
         String q = """

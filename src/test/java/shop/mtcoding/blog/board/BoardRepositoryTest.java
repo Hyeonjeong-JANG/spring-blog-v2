@@ -6,11 +6,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 
+import java.util.List;
+
 @Import(BoardRepository.class)
 @DataJpaTest
 public class BoardRepositoryTest {
     @Autowired
     private BoardRepository boardRepository;
+
+    @Test
+    public void findAll_test() {
+        List<Board> boardList = boardRepository.findAll();
+        for (int i = 0; i < boardList.size(); i++) {
+            System.out.println(boardList.get(i).getUser().getUsername());
+        }
+    }
 
     @Test
     public void findById_test() {
