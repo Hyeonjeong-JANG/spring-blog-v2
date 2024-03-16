@@ -1,8 +1,11 @@
 package shop.mtcoding.blog.board;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import shop.mtcoding.blog.user.User;
 import shop.mtcoding.blog.util.MyDateUtil;
 
 import java.sql.Timestamp;
@@ -17,22 +20,17 @@ public class Board {
     private Integer id;
     private String title;
     private String content;
-    private String username;
+    @ManyToOne
+    private User user;
+    @CreationTimestamp
     private Timestamp createdAt;
 
-    public Board(String title, String content, String username) {
+    @Builder
+    public Board(Integer id, String title, String content, User user, Timestamp createdAt) {
+        this.id = id;
         this.title = title;
         this.content = content;
-        this.username = username;
-    }
-
-    public String getTime() {
-        return MyDateUtil.timestampFormat(createdAt);
-    }
-
-    public void update(BoardRequest.UpdateDTO reqDTO) {
-        this.title = reqDTO.getTitle();
-        this.content = reqDTO.getContent();
-        this.username = reqDTO.getUsername();
+        this.user = user;
+        this.createdAt = createdAt;
     }
 }

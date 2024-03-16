@@ -9,9 +9,9 @@ public class BoardRequest {
         private String content;
         private String username;
 
-        public Board toEntity() {
-            return new Board(title, content, username);
-        }
+//        public Board toEntity() {
+//            return new Board(title, content, username);
+//        }
     }
 
 

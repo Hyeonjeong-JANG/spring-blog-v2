@@ -57,16 +57,16 @@ public class BoardPersistRepositoryTest {
         System.out.println("findById_test:" + board);
     }
 
-    @Test
-    public void save_test() {
-        // given
-        Board board = new Board("title5", "content5", "ssar");
-
-        // when
-        boardPersistRepository.save(board);
-
-        // then
-        //Assertions.assertThat(board.getTitle()).isEqualTo("title5");
-        System.out.println("save_test:" + board);
-    }
+//    @Test
+//    public void save_test() {
+//        // given
+//        Board board = new Board("title5", "content5", "ssar");
+//
+//        // when
+//        boardPersistRepository.save(board);
+//
+//        // then
+//        //Assertions.assertThat(board.getTitle()).isEqualTo("title5");
+//        System.out.println("save_test:" + board);
+//    }
 }
