@@ -15,6 +15,19 @@ public class BoardNativeRepositoryTest {
     @Autowired
     private BoardNativeRepository boardNativeRepository;
 
+    @Test
+    public void deleteById_test() {
+        // given
+        int id = 1;
+
+        // when
+        boardNativeRepository.deleteById(id);
+        List<Board> boardList = boardNativeRepository.findAll();
+
+        // then
+        Assertions.assertThat(boardList.size()).isEqualTo(3);
+
+    }
 
     @Test
     public void findById_test() {
@@ -29,6 +42,7 @@ public class BoardNativeRepositoryTest {
         Assertions.assertThat(board.getContent()).isEqualTo("내용1");
 
     }
+
 
     @Test
     public void findAll_test() {
