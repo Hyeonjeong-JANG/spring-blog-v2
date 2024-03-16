@@ -48,14 +48,14 @@ public class BoardNativeRepository {
     }
 
     @Transactional
-    public void save(String title, String content, String username) {
+    public void save(BoardRequest.SaveDTO reqDTO) {
         String q = """
                 insert into board_tb(title, content, username, created_at) values(?,?,?,now())
                 """;
         Query query = em.createNativeQuery(q);
-        query.setParameter(1, title);
-        query.setParameter(2, content);
-        query.setParameter(3, username);
+        query.setParameter(1, reqDTO.getTitle());
+        query.setParameter(2,  reqDTO.getContent());
+        query.setParameter(3,  reqDTO.getUsername());
 
         query.executeUpdate();
     }
