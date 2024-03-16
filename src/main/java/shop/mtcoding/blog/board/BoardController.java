@@ -23,8 +23,8 @@ public class BoardController {
     }
 
     @PostMapping("/board/{id}/update")
-    public String update(@PathVariable Integer id, String title, String content, String username) {
-        boardNativeRepository.updateById(id, title, content, username);
+    public String update(@PathVariable Integer id, BoardRequest.UpdateDTO reqDTO) {
+        boardPersistRepository.updateById(id, reqDTO);
         return "redirect:/board/" + id;
     }
 

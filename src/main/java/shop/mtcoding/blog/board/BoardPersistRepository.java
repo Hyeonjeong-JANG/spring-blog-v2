@@ -14,6 +14,11 @@ import java.util.List;
 @Repository
 public class BoardPersistRepository {
     private final EntityManager em;
+    @Transactional
+    public void updateById(int id, BoardRequest.UpdateDTO reqDTO) {
+       Board board = findById(id);
+       board.update(reqDTO);
+    }
 
     @Transactional
     public void deleteById(int id) {
